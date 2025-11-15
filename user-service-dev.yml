@@ -2,9 +2,6 @@ app:
   name: User Management Service
   version: 1.0.0
 
-server:
-  port: 8081
-
 logging:
   level:
     org.springframework: INFO
