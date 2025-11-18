@@ -6,10 +6,17 @@ spring:
           enabled: true
           lower-case-service-id: true
       routes:
-        - id: user-service
-          uri: lb://user-service
+        - id: user-service-route
+          uri: lb://USER-SERVICE
           predicates:
-            - Path=/users/**
+            - Path=/user-service/**
+          filters:
+            - StripPrefix=1
+
+        - id: product-service-route
+          uri: lb://PRODUCT-SERVICE
+          predicates:
+            - Path=/product-service/**
           filters:
             - StripPrefix=1
 
