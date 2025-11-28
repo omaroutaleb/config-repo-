@@ -5,23 +5,21 @@ logging:
     reactor.netty: DEBUG
     reactor.core: DEBUG
     org.springframework.web.reactive: DEBUG
+
 spring:
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:file:~/user-db-${spring.profiles.active}-${server.port}
-    serverName : localhost
-    username: sa
-    password : password
-
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/mscontol
+    username: postgres
+    password: omar
   jpa:
     generate-ddl: true
-    show_sql: true
+    show-sql: true
     hibernate:
-      ddl_auto : create
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 
 eureka:
   instance:
