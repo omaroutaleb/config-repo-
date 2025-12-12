@@ -39,3 +39,27 @@ management:
   endpoint:
     health:
       show-details: always
+resilience4j:
+  circuitbreaker:
+    instances:
+      userServiceBreaker:
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 5              # Regarde les 5 derniers appels
+        failureRateThreshold: 50          # 50% d'échecs => OPEN
+        waitDurationInOpenState: 5s       # Reste OPEN 5 secondes
+        permittedNumberOfCallsInHalfOpenState: 2  # 2 appels de test
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        minimumNumberOfCalls: 5
+
+  retry:
+    instances:
+      myRetry:
+        max-attempts: 3                   # 3 tentatives max
+        wait-duration: 500ms              # Attente entre les tentatives
+        retry-exceptions:
+          - java.lang.RuntimeException
+
+  timelimiter:
+    instances:
+      myTimeout:
+        timeout-duration: 1s              # Timeout après 1 seconde
